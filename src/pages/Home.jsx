@@ -23,7 +23,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Home</h1>
+      <h1>Nranding today</h1>
       {movies.length !== 0 && <MoviesList movies={movies} />}
       {isLoading && <p>Loading</p>}
       {error && <p>Подождите, что-то пошло не так</p>}

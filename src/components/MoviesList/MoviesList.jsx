@@ -1,13 +1,18 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import { propTypes } from 'prop-types';
+//import { propTypes } from 'prop-types';
 
+const isActive = ({ isActive }) => (isActive ? 'active_card' : 'card');
 export const MoviesList = ({ movies }) => {
   const location = useLocation();
   return (
-    <ul>
+    <ul className="render_List">
       {movies.map(movie => (
-        <li key={movie.id}>
-          <NavLink to={`/movies/${movie.id}`} state={{ from: location }}>
+        <li key={movie.id} className="renderCard">
+          <NavLink
+            to={`/movies/${movie.id}`}
+            state={{ from: location }}
+            className={isActive}
+          >
             {movie.title || movie.name}
           </NavLink>
         </li>
@@ -16,13 +21,13 @@ export const MoviesList = ({ movies }) => {
   );
 };
 
-MoviesList.propTypes = {
-  // movies: propTypes.shape(
-  //   propTypes.exact({
-  //     id: propTypes.number.isRequired,
-  //     title: propTypes.string.isRequired,
-  //     name: propTypes.string.isRequired,
-  //   })
-  // ),
-  movies: propTypes.array,
-};
+//MoviesList.propTypes = {
+//   movies: propTypes.array.Of(
+//     propTypes.shape({
+//       id: propTypes.number.isRequired,
+//       title: propTypes.string.isRequired,
+//       name: propTypes.string.isRequired,
+//     })
+//   ),
+//movies: propTypes.array,
+//};

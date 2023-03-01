@@ -41,14 +41,16 @@ const Movies = () => {
   return (
     <div>
       <h1>Movies</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form">
         <input
           type="text"
           value={query}
           onChange={handleChange}
           placeholder="Search"
         />
-        <button type="submit">search</button>
+        <button type="submit" className="imput_button">
+          search
+        </button>
       </form>
       <MoviesList movies={movies} />
       {isLoading && <p>Loading</p>}

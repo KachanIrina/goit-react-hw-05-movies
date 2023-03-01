@@ -39,7 +39,6 @@ const MovieDetails = () => {
         flexDirection: 'column',
       }}
     >
-      <h1>MovieDetalis</h1>
       <button
         onClick={handleGoBack}
         style={{
@@ -50,13 +49,21 @@ const MovieDetails = () => {
       >
         go back
       </button>
-      <img src={BASE_IMG_URL + movieData.poster_path} alt="" width="400" />
-      <NavLink to="cast" state={{ from: location.state.from }}>
+      <img src={BASE_IMG_URL + movieData.poster_path} alt="" width="300" />
+      <h1>Additional information</h1>
+      {/* <div className={css.cast}> */}
+      <NavLink
+        to="cast"
+        state={{ from: location.state.from }}
+        style={{ marginLeft: '10' }}
+      >
         cast
       </NavLink>
+      {/* </div> */}
       <NavLink to="reviews" state={{ from: location.state.from }}>
         reviews
       </NavLink>
+
       <Outlet />
     </div>
   );

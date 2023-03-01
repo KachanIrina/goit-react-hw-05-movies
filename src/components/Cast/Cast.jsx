@@ -10,10 +10,10 @@ const Cast = () => {
     fetchCastInfo(id).then(setCast);
   }, [id]);
   return (
-    <div>
-      <h1>Cast</h1>
+    <div className="Cast_box">
+      <h1 className="Cast_title">Cast</h1>
       {cast.map(actor => (
-        <li key={actor.id}>
+        <li key={actor.id} className="Cast_card">
           <img src={BASE_IMG_URL + actor.profile_path} alt="" width="200" />
           {actor.name}
         </li>

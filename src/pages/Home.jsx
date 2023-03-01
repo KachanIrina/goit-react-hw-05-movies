@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { fetchDayTrend } from 'services/apiService';
 import { MoviesList } from 'components/MoviesList/MoviesList';
+import { Loader } from 'components/Loader/Loader';
+import { toast } from 'react-toastify';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -25,8 +27,8 @@ const Home = () => {
     <div>
       <h1>Nranding today</h1>
       {movies.length !== 0 && <MoviesList movies={movies} />}
-      {isLoading && <p>Loading</p>}
-      {error && <p>Подождите, что-то пошло не так</p>}
+      {isLoading && <Loader />}
+      {error && toast.error('Подождите...')}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import { Loader } from 'components/Loader/Loader';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -52,8 +53,8 @@ const Movies = () => {
           search
         </button>
       </form>
-      <MoviesList movies={movies} />
-      {isLoading && <p>Loading</p>}
+      {movies.length !== 0 && <MoviesList movies={movies} />}
+      {isLoading && <Loader />}
       {error && <p>Подождите, что-то пошло не так</p>}
     </div>
   );

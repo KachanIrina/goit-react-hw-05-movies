@@ -8,17 +8,30 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { BASE_IMG_URL } from 'services/constants';
+import { Loader } from 'components/Loader/Loader';
+import { toast } from 'react-toastify';
 
 const MovieDetails = () => {
   const [movieData, setMovieData] = useState(null);
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchMovieDetsById(id).then(resp => {
-      setMovieData(resp);
-    });
+    (async () => {
+      setIsLoading(true);
+      try {
+        const data = await fetchMovieDetsById(id);
+        setMovieData(data);
+        console.log(data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
   }, [id]);
 
   const handleGoBack = () => {
@@ -49,9 +62,18 @@ const MovieDetails = () => {
       >
         go back
       </button>
-      <img src={BASE_IMG_URL + movieData.poster_path} alt="" width="300" />
+
+      <img
+        src={
+          movieData.poster_path
+            ? BASE_IMG_URL + movieData.poster_path
+            : require('img/smile.jpg')
+        }
+        alt=""
+        width="200"
+      />
+
       <h1>Additional information</h1>
-      {/* <div className={css.cast}> */}
       <NavLink
         to="cast"
         state={{ from: location.state.from }}
@@ -59,12 +81,12 @@ const MovieDetails = () => {
       >
         cast
       </NavLink>
-      {/* </div> */}
       <NavLink to="reviews" state={{ from: location.state.from }}>
         reviews
       </NavLink>
-
       <Outlet />
+      {isLoading && <Loader />}
+      {error && toast.error('Подождите...')}
     </div>
   );
 };
